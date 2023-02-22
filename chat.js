@@ -75,8 +75,5 @@ console.log(value);
     push(messagesRef, {hours, minutes, name, text});
     messageInput.value = '';
   });
-  document.getElementById('wrapper-load').style.opacity = 0;
-  setTimeout(() => {
-    document.getElementById('wrapper-load').style.display = 'none';
-  }, 500);
+
   
