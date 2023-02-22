@@ -484,20 +484,28 @@ p {
       
       const hours = now.getHours();
     const minutes = now.getMinutes();
+    if(name.includes(".")){
+      messageInput.disabled = false;
+      textBox.disabled = false;
+      SendButton.disabled = false;
 
+      console.log('bypass')
+  
+    } else {
     isSendingMessage = true;
     messageInput.disabled = true;
     textBox.disabled = true;
     SendButton.disabled = true;
+    
     var timevar = 5;
     var cooldownn = setInterval(() => {
       
       timevar--
 
       cooltxt.innerHTML = 'Cooldown Is Enabled! ' + timevar + 's';
-
+ 
     }, 1000);
-
+  }
     setTimeout(() => {
     isSendingMessage = false;
     messageInput.disabled = false;
@@ -507,7 +515,7 @@ p {
     cooltxt.innerHTML = '';
     clearInterval(cooldownn);
     }, 5000);
-
+  
   
       push(messagesRef, {hours, minutes, name, text});
       messageInput.value = '';
