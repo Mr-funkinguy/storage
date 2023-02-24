@@ -324,7 +324,7 @@ p {
 </head>
 <body>
 
-<div style="height: 35px;border-radius: 15px; width: 100%; background-color: rgba(255, 196, 0, 0.529);"> <h4 style="position: relative; text-align: center; font-family: Arial, Helvetica, sans-serif;  bottom: -10%;">Servers Are Being Updated, Expect Chat Delays</h4></div>
+<div style="height: 35px;border-radius: 15px; width: 100%; background-color: rgba(255, 196, 0, 0.529);"> <h4 style="position: relative; text-align: center; font-family: Arial, Helvetica, sans-serif;  bottom: -10%;">Servers Will Be Down Friday the 24th from 8-9 pm</h4></div>
 
   <div id="wrapper-load" style="transition: 0.5s; z-index: 9; position: fixed; background-color: #252525; width: 100%; height: 100%;">
     <div class="loader">
@@ -342,11 +342,90 @@ p {
   font-family: Arial, Helvetica, sans-serif;  color: white; position: absolute; " id="loading-info">Loading</span>
   </div>
 
+  <div id="page_logs" style= "visibility: hidden;  z-index: 6; position: fixed; transition: 0.5s; width: 100%; height: 100%; background-color: #282828;">
+   <h1 onclick="close_logs()" style="z-index: 7; left: 0.5%; color: white; cursor: pointer; position: fixed;" >X</h1>
+    <h5  id="message-logs-txt" style="color: #fefefe; overflow-y: auto; height: 95%;  position: relative; right: -3%;">Loading messages...</h5>
+   
+  </div>
+
   <p id="typing-message"></p>
-  <div style=" height: 330px; text-align: center; overflow-y: auto; border-radius: 15px; width: 100%; background-color: #252525ef;" id="messages"></div>
-  <form id="message-form" style="position: absolute; bottom: 5px;">
+  <div style=" height: 330px; text-align: center; overflow-y: auto;  border-radius: 15px; width: 100%; background-color: #252525ef;" id="messages"></div>
+  <button id="log-button" onclick="logsopen()" type="menu">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span>Logs</span>
+
+
+  </button>
+
+  <script>
+    var loadedLogs = false;
+    page_logs.style.opacity = 0;
+    function logsopen() {
+      var page_logs = document.getElementById('page_logs');
+      var txt_logs = document.getElementById('message-logs-txt');
+
+      
+      page_logs.style.visibility = 'visible';
+      page_logs.style.opacity = 1;
+      
+      
+       
+      if(loadedLogs===false){
+        LoadLogs();
+        loadedLogs = true;
+      } else {
+
+      }
+          }
+      function LoadLogs() {
+        var page_logs = document.getElementById('page_logs');
+      var txt_logs = document.getElementById('message-logs-txt');
+
+
+        fetch('https://raw.githubusercontent.com/Mr-funkinguy/Music-Player-/main/logs.txt')
+        .then(response => response.text())
+        .then(data => {
+          //console.log(data);
+          
+          setTimeout(() => {
+            txt_logs.innerHTML = 'Leading The Data...';
+          }, 500);
+          setTimeout(() => {
+            txt_logs.innerHTML = data;
+          }, 1000);
+          setTimeout(() => {
+            txt_logs.style.wordWrap = 'break-word';
+            txt_logs.style.whiteSpace = 'pre-wrap';
+          }, 1500);
+          setTimeout(() => {
+            txt_logs.innerHTML = data;
+            txt_logs.scrollTop = txt_logs.scrollHeight;
+          
+          }, 2000);
+        })
+      }
+
+      function close_logs() {
+        var page_logs = document.getElementById('page_logs');
+      var txt_logs = document.getElementById('message-logs-txt');
+
+      page_logs.style.opacity = 0;
+      setTimeout(() => {
+        page_logs.style.visibility = 'hidden';
+      }, 500);
+     
+      
+      }
+  </script>
+
+  <form id="message-form" style="position: absolute; bottom: 10px;">
+
     <h4 style="font-family: Arial, Helvetica, sans-serif; text-align: center; margin-right: 1%;" id="cooldown"></h4>
-    <div class="textInputWrapper">
+   
+    <div class="textInputWrapper" style="">
       
       <input id="message-input" placeholder="Type Here" type="text" class="textInput">
       <div style="width: 100%; height: 5px;"></div>
