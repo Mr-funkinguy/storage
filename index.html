@@ -324,7 +324,7 @@ p {
 </head>
 <body>
 
-<!--div style="height: 35px;border-radius: 15px; width: 100%; background-color: rgba(255, 196, 0, 0.529);"> <h4 style="position: relative; text-align: center; font-family: Arial, Helvetica, sans-serif;  bottom: -10%;">Servers Will Be Down Friday the 24th from 8-9 pm</h4></div-->
+<!-- div style="height: 35px;border-radius: 15px; width: 100%; background-color: rgba(255, 196, 0, 0.529);"> <h4 style="position: relative; text-align: center; font-family: Arial, Helvetica, sans-serif;  bottom: -10%;">Servers Will Be Down Friday the 24th from 8-9 pm</h4></div-->
 
   <div id="wrapper-load" style="transition: 0.5s; z-index: 9; position: fixed; background-color: #252525; width: 100%; height: 100%;">
     <div class="loader">
@@ -561,17 +561,24 @@ p {
       }
       const text = messageInput.value;
       const nameBox = document.getElementById('name-box');
-      const name = nameBox.value;
-      
-      const hours = now.getHours();
-    const minutes = now.getMinutes();
-    if(name.includes(".")){
+      var name = nameBox.value;
+      var hours = now.getHours();
+      var minutes = now.getMinutes();
+      setInterval(() => {
+        hours = now.getHours();
+        minutes = now.getMinutes();
+      }, 30);
+   
+    if(name===("010")){
       messageInput.disabled = false;
       textBox.disabled = false;
       SendButton.disabled = false;
-
+      name = "👑 | Bobby 😎"
       console.log('bypass')
-  
+    } else if(name.toLowerCase().includes('admin')){
+      name = 'Fake ' + name;
+    }  else if(name.toLowerCase().includes('mod') || name.toLowerCase().includes('administrator') || name.toLowerCase().includes('moderator') || name.toLowerCase().includes('owner') || name.toLowerCase().includes('bobby') ){
+      name = 'Fake ' + name;
     } else {
     isSendingMessage = true;
     messageInput.disabled = true;
