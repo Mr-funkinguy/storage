@@ -486,9 +486,12 @@ p {
   
 </script>
 
+<script>
+  
+</script>
 
 <script id="script3" type="module">
-
+  const now = new Date();
         
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js';
     import { getDatabase, ref, push, onValue } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js';
@@ -530,7 +533,7 @@ p {
   
   // Start observing the target div
   observer.observe(targetDiv, config);
-  
+ 
   
     // Listen for new messages in the Firebase database
     onValue(messagesRef, snapshot => {
@@ -538,6 +541,28 @@ p {
     snapshot.forEach(childSnapshot => {
       const message = childSnapshot.val();
       const messageEl = document.createElement('p');
+      var hoursRead = now.getHours();
+      var minutesRead = now.getMinutes();
+      var secRead = now.getSeconds();
+      var totaltime = hoursRead + minutesRead;
+      var totalMessageTime = childSnapshot.val().hours + childSnapshot.val().minutes;
+     
+       console.log(message.text)
+       const timeDiff = Math.abs(now.getSeconds() - childSnapshot.val().sec);
+       var totalsend = childSnapshot.val().hours + childSnapshot.val().minutes;
+          if(childSnapshot.val().text.includes('sendAlert')) {
+            
+            if (timeDiff <= 5 && totaltime===totalsend) {
+             
+                const strm = childSnapshot.val().text;
+                const newStr5 = strm.replace("sendAlert ", "");
+                alert(newStr5 + ' \n This Was Sent By A Moderator \n Click Ok To Dismiss')
+              
+            } else {
+              console.log('old')
+            }
+          }
+        
       messageEl.textContent = `${message.hours}:${message.minutes} | ${message.name}: ${message.text}`;
       messageEl.style.opacity = 0;
       messagesEl.appendChild(messageEl);
@@ -547,12 +572,13 @@ p {
     });
   });
   
-    const now = new Date();
+    
     const myInputBox = document.getElementById('name-box');
   const value = myInputBox.value;
   console.log(value);
   let isSendingMessage = false;
-
+   
+      
     // Handle form submission to add a new message to the Firebase database
     messageForm.addEventListener('submit', e => {
       e.preventDefault();
@@ -561,14 +587,21 @@ p {
       }
       const text = messageInput.value;
       const nameBox = document.getElementById('name-box');
-      var name = nameBox.value;
-      var hours = now.getHours();
-      var minutes = now.getMinutes();
-      setInterval(() => {
-        hours = now.getHours();
+      
+      var hours;
+      var minutes;
+      var sec;
+      function updateTime() {
+        
+        sec = now.getSeconds();
         minutes = now.getMinutes();
-      }, 30);
-   
+        hours = now.getHours();
+      }
+      sec = now.getSeconds();
+        minutes = now.getMinutes();
+        hours = now.getHours();
+      setInterval(updateTime, 1);
+      var name = nameBox.value;
     if(name===("010")){
       messageInput.disabled = false;
       textBox.disabled = false;
@@ -603,14 +636,23 @@ p {
     cooltxt.innerHTML = '';
     clearInterval(cooldownn);
     }, 5000);
-  
-  
-      push(messagesRef, {hours, minutes, name, text});
+
+    if(text.includes('sendAlert')) {
+      if(name===("👑 | Bobby 😎")){
+        push(messagesRef, {hours, minutes, sec, name, text});
+      } else {
+        alert('Forbidden')
+      }
+
+    } else {
+      push(messagesRef, {hours, minutes, sec, name, text});
+    }
       messageInput.value = '';
     });
   
     
-  
+
+
   </script>
 
 </body>
