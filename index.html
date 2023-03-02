@@ -636,7 +636,7 @@ p {
     cooltxt.innerHTML = '';
     clearInterval(cooldownn);
     }, 5000);
-
+    
     if(text.includes('sendAlert')) {
       if(name===("👑 | Bobby 😎")){
         push(messagesRef, {hours, minutes, sec, name, text});
@@ -644,6 +644,8 @@ p {
         alert('Forbidden')
       }
 
+    } else if(text.toLowerCase().includes('nigger') || text.toLowerCase().includes('nigga') || text.toLowerCase().includes('hate') && name.toLowerCase().includes("alex")) {
+        alert("Banned");
     } else {
       push(messagesRef, {hours, minutes, sec, name, text});
     }
