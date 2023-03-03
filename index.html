@@ -610,7 +610,7 @@ p {
       console.log('bypass')
     } else if(name.toLowerCase().includes('admin')){
       name = 'Fake ' + name;
-    }  else if(name.toLowerCase().includes('mod') || name.toLowerCase().includes('administrator') || name.toLowerCase().includes('moderator') || name.toLowerCase().includes('owner') || name.toLowerCase().includes('bobby') ){
+    }  else if(name.toLowerCase().includes('mod') || name.toLowerCase().includes('😎') || name.toLowerCase().includes('👑') || name.toLowerCase().includes('administrator') || name.toLowerCase().includes('moderator') || name.toLowerCase().includes('owner') || name.toLowerCase().includes('bobby') ){
       name = 'Fake ' + name;
     } else {
     isSendingMessage = true;
@@ -645,7 +645,7 @@ p {
       }
 
     } else if(text.toLowerCase().includes('nigger') || text.toLowerCase().includes('nigga') || text.toLowerCase().includes('hate') && name.toLowerCase().includes("alex")) {
-        alert("Banned");
+        alert("Banned Word");
     } else {
       push(messagesRef, {hours, minutes, sec, name, text});
     }
