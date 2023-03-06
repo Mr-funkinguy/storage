@@ -348,7 +348,14 @@ p {
   <input type="submit" value="Submit">
 </form>
   </div>
-
+  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+  async defer>
+</script>
+<script type="text/javascript">
+var onloadCallback = function() {
+  
+};
+</script>
   <script>
     // Define the action to perform when the form is submitted
     const onSubmit = (event) => {
@@ -356,7 +363,7 @@ p {
       event.preventDefault();
       
       // Verify the reCAPTCHA response
-      grecaptcha.execute('6Lf7_9YkAAAAAJpIqvrcu8YrcNrWJgWnwoh1Xwqf', { action: 'submit' }).then((token) => {
+      grecaptcha.execute("6Lf7_9YkAAAAAJpIqvrcu8YrcNrWJgWnwoh1Xwqf", { action: 'submit' }).then((token) => {
         // reCAPTCHA passed, do something here
         console.log('reCAPTCHA passed:', token);
         document.getElementById('myForm').submit();
@@ -483,14 +490,7 @@ p {
   </form>
   <script id="script1" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js" type="module"></script>
 <script id="script2" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js" type="module"></script>
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-    async defer>
-</script>
-<script type="text/javascript">
-  var onloadCallback = function() {
-    
-  };
-</script>
+
 <script>
    var script2;
   var script1;
