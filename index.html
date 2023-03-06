@@ -6,8 +6,6 @@
 <link rel="icon" href="https://github.com/Mr-funkinguy/storage/blob/Hi223453e4654776535464567898765432/Untitled_Artwork%20247.png?raw=true">
 <title>ChatRoom</title>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-async defer></script>
 <meta name="description" content="A chat Room">
 <style>
     body {
@@ -344,49 +342,9 @@ p {
   transform: translate(-50%, -50%);
   font-family: Arial, Helvetica, sans-serif;  color: white; position: absolute; " id="loading-info">Loading</span>
 
-<form id="myFormmm" style="transform: scale(0.7); top: 80%; position: fixed; left: 37%;" action="?" method="POST">
-  <div class="g-recaptcha" data-sitekey="6Lf7_9YkAAAAAJpIqvrcu8YrcNrWJgWnwoh1Xwqf"></div>
-  <br/>
-  <input type="submit" value="Submit">
-</form>
+
   </div>
 
-</script>
-<script type="text/javascript">
-var onloadCallback = function() {
-  
-};
-</script>
-  <script>
-    // Define the action to perform when the form is submitted
-    const onSubmit = (event) => {
-      // Prevent the default form submission
-      event.preventDefault();
-      
-      // Verify the reCAPTCHA response
-      grecaptcha.execute("6Lf7_9YkAAAAAJpIqvrcu8YrcNrWJgWnwoh1Xwqf", { action: 'submit' }).then((token) => {
-        // reCAPTCHA passed, do something here
-        console.log('reCAPTCHA passed:', token);
-        document.getElementById('myForm').submit();
-        window.onload = function() {
-          console.log('Page loaded!');
-          document.getElementById('wrapper-load').style.opacity = 0;
-          setTimeout(() => {
-            document.getElementById('wrapper-load').style.display = 'none';
-          }, 500);
-          // additional code to be executed when the page is fully loaded goes here
-          
-        };
-      }).catch((error) => {
-        // reCAPTCHA failed, handle the error here
-        console.error('reCAPTCHA failed:', error);
-        alert('Please complete the reCAPTCHA');
-      });
-    };
-    
-    // Attach the onSubmit function to the form's submit event
-    document.getElementById('myFormmm').addEventListener('submit', onSubmit);
-    </script>
   <div id="page_logs" style= "visibility: hidden;  z-index: 6; position: fixed; transition: 0.5s; width: 100%; height: 100%; background-color: #282828;">
    <h1 onclick="close_logs()" style="z-index: 7; left: 0.5%; color: white; cursor: pointer; position: fixed;" >X</h1>
     <h5  id="message-logs-txt" style="color: #fefefe; overflow-y: auto; height: 95%;  position: relative; right: -3%;">Loading messages...</h5>
@@ -491,7 +449,14 @@ var onloadCallback = function() {
   </form>
   <script id="script1" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js" type="module"></script>
 <script id="script2" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js" type="module"></script>
-
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+    async defer>
+</script>
+<script type="text/javascript">
+  var onloadCallback = function() {
+    
+  };
+</script>
 <script>
    var script2;
   var script1;
@@ -518,7 +483,15 @@ var onloadCallback = function() {
 }, 1);
 
 
-    
+    window.onload = function() {
+      console.log('Page loaded!');
+      document.getElementById('wrapper-load').style.opacity = 0;
+      setTimeout(() => {
+        document.getElementById('wrapper-load').style.display = 'none';
+      }, 500);
+      // additional code to be executed when the page is fully loaded goes here
+      
+    };
     
   
 </script>
